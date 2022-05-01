@@ -1,0 +1,31 @@
+; filename -- 设备名
+; rw -- 读写类型
+; size -- 控制涉及的设备地址范围, 应该设为100%
+; numjobs -- 单线程或多线程, 应该设为1
+; loops -- 循环次数, 应该设为1000+
+; runtime -- 运行时间, 应该设为3h或者48h
+; example -- sudo filename=/dev/sdb rw=randrw size=100% numjobs=1 loops=1000 runtime=3h fio --output=fio_stats.log 01_io_workload
+[io_workload]
+filename=${filename}
+rw=${rw}
+;rwmixwrite=50
+randseed=1130
+direct=1
+bsrange=4kb-1mb
+size=${size}
+ioengine=libaio
+iodepth=16
+thread
+numjobs=${numjobs}
+loops=${loops}
+runtime=${runtime}
+
+group_reporting=1
+per_job_logs=0
+write_lat_log=fio
+write_bw_log=fio
+write_iops_log=fio
+disable_clat=1
+disable_slat=1
+lat_percentiles=1
+percentile_list=1:5:10:20:30:40:50:60:70:80:90:95:99:99.5:99.9:99.95:99.99:99.999:99.9999:100

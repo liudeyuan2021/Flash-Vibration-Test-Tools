@@ -1,0 +1,20 @@
+; size -- 控制涉及的设备地址范围, 应该设为100%
+; numjobs -- 单线程或多线程
+; loops -- 循环次数
+; example -- sudo -S filename=/dev/sda size=100% numjobs=1 loops=1 fio /home/liudeyuan/Desktop/vibration/02_pe_cycle < /home/liudeyuan/Desktop/vibration/password
+[writers]
+filename=${filename}
+rw=write
+direct=1
+bs=1mb
+size=${size}
+ioengine=libaio
+iodepth=64
+thread
+numjobs=${numjobs}
+loops=${loops}
+
+disable_lat=1
+disable_clat=1
+disable_slat=1
+disable_bw=1
